@@ -9,4 +9,5 @@ COPY tsconfig.json $APP_DIR/
 COPY astro.config.mjs $APP_DIR/
 COPY src $APP_DIR/src
 
+
 ENTRYPOINT ["npm", "run", "dev"]

@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
 
-npx prisma migrate dev
+npx prisma migrate deploy
 npm run dev

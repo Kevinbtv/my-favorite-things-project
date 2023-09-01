@@ -13,6 +13,8 @@ services:
     backend:
         build:
             context: server/.
+        depends_on:
+            - db
         ports:
             - 9000:3333
         volumes:

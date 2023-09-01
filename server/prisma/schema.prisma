@@ -10,10 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Habit {
-  id         String   @id @default(uuid())
-  title      String
-  created_at DateTime
+model Location {
+  id          Int     @id @default(autoincrement())
+  local       String
+  country     String
+  description String
+  favorite    Boolean @default(false)
 
-  @@map("habits")
+  @@map("locations")
 }

@@ -10,4 +10,7 @@ COPY tsconfig.json $APP_DIR/
 COPY prisma $APP_DIR/prisma
 COPY src $APP_DIR/src
 RUN npx prisma generate
-ENTRYPOINT [ "npm", "run", "dev" ]
+COPY entrypoint.sh /entrypoint.sh    
+RUN chmod +x /entrypoint.sh          
+
+CMD ["/entrypoint.sh"]

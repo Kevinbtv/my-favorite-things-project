@@ -20,3 +20,15 @@ services:
         volumes:
             - "./server/src:/app/src"
             - "./server/prisma:/app/prisma"
+        command: sh -c "npx prisma migrate dev --name table && npm run dev"
+    frontend:
+        build:
+            context: web/.
+        network_mode: "host"
+        depends_on:
+            - backend
+        ports:
+            - 3000:3000
+        volumes:
+            - "./web/src:/app/src"
+            - "./web/astro.config.mjs:/app/astro.config.mjs"

@@ -24,8 +24,6 @@ services:
         build:
             context: web/.
         network_mode: "host"
-        ports:
-            - 3000:3000
         volumes:
             - "./web/src:/app/src"
             - "./web/astro.config.mjs:/app/astro.config.mjs"

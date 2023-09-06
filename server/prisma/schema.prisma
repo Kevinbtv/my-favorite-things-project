@@ -11,10 +11,10 @@ datasource db {
 }
 
 model Location {
-  id          Int     @id @default(autoincrement())
+  id          String     @id @default(uuid())
   local       String
   country     String
-  description String
+  description String?
   favorite    Boolean @default(false)
 
   @@map("locations")

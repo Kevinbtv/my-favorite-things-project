@@ -3,7 +3,13 @@
   import { createDataApi, deleteDataApi, getDataApi } from "../../service/api";
 
   interface BodyData {
-    id?: number;
+    id: string;
+    local: string;
+    country: string;
+    description: string;
+  }
+
+  interface FormData {
     local: string;
     country: string;
     description: string;
@@ -13,7 +19,7 @@
   let local: string;
   let country: string;
   let description: string;
-  let formData: BodyData;
+  let formData: FormData;
   let responseData: BodyData[] = [];
 
   const handlleSubmit = async () => {

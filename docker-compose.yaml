@@ -1,29 +1,29 @@
 version: "3"
 
 services:
-    db:
-        image: bitnami/postgresql
-        container_name: projeto-pdi-api
-        ports:
-            - 5432:5432
-        environment:
-            - POSTGRESQL_USERNAME=docker
-            - POSTGRESQL_PASSWORD=docker
-            - POSTGRESQL_DATABASE=apiprojetopdi
-    backend:
-        build:
-            context: server/.
-        depends_on:
-            - db
-        ports:
-            - 9000:3333
-        volumes:
-            - "./server/src:/app/src"
-            - "./server/prisma:/app/prisma"
-    frontend:
-        build:
-            context: web/.
-        network_mode: "host"
-        volumes:
-            - "./web/src:/app/src"
-            - "./web/astro.config.mjs:/app/astro.config.mjs"
+  db:
+    image: bitnami/postgresql
+    container_name: projeto-pdi-api
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=apiprojetopdi
+  backend:
+    build:
+      context: server/.
+    depends_on:
+      - db
+    ports:
+      - 9000:3333
+    volumes:
+      - "./server/src:/app/src"
+      - "./server/prisma:/app/prisma"
+  frontend:
+    build:
+      context: web/.
+    network_mode: "host"
+    volumes:
+      - "./web/src:/app/src"
+      - "./web/astro.config.mjs:/app/astro.config.mjs"

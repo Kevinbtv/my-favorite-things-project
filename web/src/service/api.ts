@@ -58,3 +58,13 @@ export const editDataApi = async (id: string, body: BodyData) => {
     console.error(error);
   }
 };
+
+export const toggleFavoriteData = async (id: string) => {
+  try {
+    const response = await axios.patch(`http://localhost:9000/locations/${id}`);
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};

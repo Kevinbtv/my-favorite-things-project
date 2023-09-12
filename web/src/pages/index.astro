@@ -5,21 +5,6 @@ import AddNewPlace from "./_components/AddNewPlace.svelte";
 
 <Layout title="My Favorites Things">
   <main>
-    <h1>Olá, seja bem-vindo!</h1>
-    <p>Adicione algo que você goste muito de fazer!</p>
-
     <AddNewPlace client:load />
   </main>
 </Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-</style>

@@ -1,91 +1,78 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { createDataApi, deleteDataApi, getDataApi } from "../../service/api";
+  import { createDataApi } from "../../service/api";
 
-  interface BodyData {
-    id: string;
+  interface Location {
     local: string;
     country: string;
     description: string;
+    favorite: boolean;
   }
 
-  interface FormData {
-    local: string;
-    country: string;
-    description: string;
-  }
+  type FormData = Omit<Location, "favorite">;
 
-  let mounted = false;
-  let local: string;
-  let country: string;
-  let description: string;
-  let formData: FormData;
-  let responseData: BodyData[] = [];
+  let locations: Array<Location> = [],
+    local = "",
+    country = "",
+    description = "",
+    id = "",
+    editingIndex = -1,
+    formData: FormData;
 
-  const handlleSubmit = async () => {
+  const createFormData = async () => {
     formData = { local, country, description };
-    const response = await createDataApi(formData);
-
-    if (response?.status) {
-      getInfo();
-    }
+    return await createDataApi(formData);
   };
-
-  const getInfo = async () => {
-    const response = await getDataApi();
-
-    if (response?.data) {
-      responseData = response.data;
-    }
-  };
-
-  const deleteInfo = async (id: string) => {
-    const response = await deleteDataApi(id);
-
-    if (response?.status) {
-      getInfo();
-    }
-  };
-
-  onMount(() => {
-    mounted = true;
-
-    getInfo();
-  });
 </script>
 
-<form
-  class="default-grid-form"
-  method="POST"
-  novalidate={mounted}
-  on:submit|preventDefault={handlleSubmit}
->
-  <div>
-    <label for="local">Local</label>
-    <input type="text" name="local" id="local" bind:value={local} />
-  </div>
+<h2>Locais Favoritos para Visitar</h2>
 
-  <div>
-    <label for="local">País</label>
-    <input type="text" name="country" id="country" bind:value={country} />
-  </div>
-
-  <div>
-    <label for="local">Descrição</label>
-    <textarea name="description" id="description" bind:value={description} />
-  </div>
-
-  <button type="submit">Enviar</button>
+<form on:submit|preventDefault={createFormData}>
+  <label>
+    Local:
+    <input type="text" bind:value={local} />
+  </label>
+  <label>
+    País:
+    <input type="text" bind:value={country} />
+  </label>
+  <label>
+    Descrição:
+    <textarea bind:value={description} />
+  </label>
+  <button type="submit">Adicionar Local</button>
 </form>
 
-<div>
-  {#each responseData as data}
-    <div>
-      <p>{data.id}</p>
-      <p>{data.local}</p>
-      <p>{data.country}</p>
-      <p>{data.description}</p>
-      <button on:click={() => deleteInfo(data.id)}>Deleta isso</button>
-    </div>
-  {/each}
-</div>
+<style>
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  textarea {
+    height: 200px;
+  }
+
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+</style>

@@ -42,3 +42,19 @@ export const deleteDataApi = async (id: string) => {
     console.error(error);
   }
 };
+
+export const editDataApi = async (id: string, body: BodyData) => {
+  const { local, country, description } = body;
+
+  try {
+    const response = await axios.put(`http://localhost:9000/locations/${id},`, {
+      local,
+      country,
+      description,
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};

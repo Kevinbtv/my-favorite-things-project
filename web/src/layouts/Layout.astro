@@ -6,7 +6,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -17,17 +17,51 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <header>
+      <h1>Meus Locais</h1>
+      <nav>
+        <a href="/">Início</a>
+        <a href="/places">Meus lugares</a>
+        <a href="/favorites">Meus favoritos</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
   </body>
 </html>
-<style is:global>
+<style is:global lang="scss">
   html {
     font-family: system-ui, sans-serif;
     background: #13151a;
-    background-size: 224px;
   }
-  code {
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+
+  main {
+    align-items: stretch;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.25rem;
+    margin: 0 auto;
+    width: 64rem;
+  }
+
+  header {
+    align-items: center;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+    width: 64rem;
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
   }
 </style>

@@ -9,7 +9,11 @@ import {
 
 export const appRoutes = async (app: FastifyInstance) => {
   app.get("/locations", async () => {
-    const locations = await prisma.location.findMany();
+    const locations = await prisma.location.findMany({
+      orderBy: {
+        id: "asc",
+      },
+    });
     return locations;
   });
 
@@ -52,18 +56,29 @@ export const appRoutes = async (app: FastifyInstance) => {
 
   app.patch("/locations/:id", async (request, reply) => {
     const { id } = getIdParam.parse(request.params);
-    const { favorite } = getLocationPatchBody.parse(request.body);
 
-    await prisma.location.update({
+    const location = await prisma.location.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!location) {
+      return reply.status(404).send("Localização não encontrada");
+    }
+
+    const updatedFavorite = !location.favorite;
+
+    const isFavorite = await prisma.location.update({
       where: {
         id,
       },
       data: {
-        favorite,
+        favorite: updatedFavorite,
       },
     });
 
-    return reply.status(204).send();
+    return isFavorite.favorite;
   });
 
   app.delete("/locations/:id", async (request, reply) => {

@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="location-actions">
-            <button type="button">
+            <button type="button" class:favorite-button={!!location.favorite}>
               {#if location.favorite}
                 Remover dos Favoritos
               {:else}
@@ -66,20 +66,31 @@
 {/if}
 
 <style>
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
   ul.location-list {
     list-style: none;
     padding: 0;
   }
 
   li {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+    background: #1f222a;
+    border: 1px solid #36393f;
+    border-radius: 10px;
     padding: 20px;
-    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .field-label {
     font-weight: bold;
+    color: #fff;
   }
 
   .location-info {
@@ -92,6 +103,22 @@
   }
 
   .location-actions {
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    background-color: #2e7d32;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+
+  button.favorite-button {
+    background-color: #f44336;
   }
 </style>

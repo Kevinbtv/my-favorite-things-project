@@ -9,7 +9,7 @@ export const getLocationPutBody = z.object({
   local: z.string(),
   country: z.string(),
   description: z.string(),
-  favorite: z.boolean(),
+  favorite: z.boolean().optional(),
 });
 
 export const getLocationPatchBody = z.object({

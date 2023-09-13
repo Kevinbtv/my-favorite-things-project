@@ -35,9 +35,21 @@ export const appRoutes = async (app: FastifyInstance) => {
 
   app.put("/locations/:id", async (request, reply) => {
     const { id } = getIdParam.parse(request.params);
-    const { local, country, description, favorite } = getLocationPutBody.parse(
+    const { local, country, description } = getLocationPutBody.parse(
       request.body
     );
+
+    const location = await prisma.location.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!location) {
+      return reply.status(404).send("Localização não encontrada");
+    }
+
+    const updatedFavorite = location.favorite;
 
     await prisma.location.update({
       where: {
@@ -47,7 +59,7 @@ export const appRoutes = async (app: FastifyInstance) => {
         local,
         country,
         description,
-        favorite,
+        favorite: updatedFavorite,
       },
     });
 

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { createDataApi } from "../../service/api";
+  import { createEventDispatcher } from "svelte";
+  import { createDataApi, editDataApi } from "../../service/api";
 
   interface Location {
     local: string;
@@ -10,17 +11,37 @@
 
   type FormData = Omit<Location, "favorite">;
 
-  let locations: Array<Location> = [],
-    local = "",
+  export let local = "",
     country = "",
     description = "",
+    formData: FormData | undefined = undefined,
+    feedbackMessage = "",
     id = "",
-    editingIndex = -1,
-    formData: FormData;
+    isModal = false,
+    isOpen;
+
+  const dispatch = createEventDispatcher();
+
+  const editFormData = async () => {
+    const body = {
+      local,
+      country,
+      description,
+    };
+    const response = await editDataApi(id, body);
+    dispatch("editFormData");
+    isOpen = false;
+    return response;
+  };
 
   const createFormData = async () => {
     formData = { local, country, description };
-    return await createDataApi(formData);
+    await createDataApi(formData);
+
+    local = "";
+    country = "";
+    description = "";
+    feedbackMessage = "Envio feito com sucesso!";
   };
 </script>
 
@@ -39,7 +60,16 @@
     Descrição:
     <textarea bind:value={description} />
   </label>
-  <button type="submit">Adicionar Local</button>
+  <div class="actions">
+    {#if feedbackMessage}
+      <div class="feedback">{feedbackMessage}</div>
+    {/if}
+    {#if isModal}
+      <button type="button" on:click={editFormData}>Salvar</button>
+    {:else}
+      <button type="submit">Adicionar Local</button>
+    {/if}
+  </div>
 </form>
 
 <style>
@@ -60,6 +90,7 @@
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
   }
 
   textarea {
@@ -74,5 +105,16 @@
     border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .feedback {
+    color: #009900;
+    font-weight: bold;
+    margin-top: 10px;
   }
 </style>

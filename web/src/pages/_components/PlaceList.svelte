@@ -1,20 +1,15 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import {
-    deleteDataApi,
-    getDataApi,
-    editDataApi,
-    toggleFavoriteData,
-  } from "../../service/api";
+  import { getDataApi, toggleFavoriteData } from "../../service/api";
+  import Modal from "./Modal/Modal.svelte";
 
   interface Location {
+    id: string;
     local: string;
     country: string;
     description: string;
     favorite: boolean;
   }
-
-  type FormData = Omit<Location, "favorite">;
 
   let locations: Array<Location> = [],
     local = "",
@@ -22,9 +17,8 @@
     description = "",
     id = "",
     editingIndex = -1,
-    formData: FormData,
     hasList: boolean,
-    isFavorite: boolean;
+    isOpen = false;
 
   const getInfo = async () => {
     const response = await getDataApi();
@@ -44,10 +38,44 @@
     }
   };
 
+  const editLocation = (identifier: string) => {
+    const locationToEdit = locations.find((loc) => loc.id === identifier);
+
+    if (locationToEdit) {
+      local = locationToEdit.local;
+      country = locationToEdit.country;
+      description = locationToEdit.description;
+      id = identifier;
+      editingIndex = locations.indexOf(locationToEdit);
+      isOpen = true;
+    }
+  };
+
+  const updateLocation = (identifier: string) => {
+    const locationToEdit = locations.find((loc) => loc.id === identifier);
+
+    if (locationToEdit) {
+      locationToEdit.local = local;
+      locationToEdit.country = country;
+      locationToEdit.description = description;
+      locations = [...locations];
+      isOpen = true;
+    }
+  };
+
   onMount(async () => {
     await getInfo();
   });
 </script>
+
+<Modal
+  bind:local
+  bind:country
+  bind:description
+  bind:id
+  bind:isOpen
+  on:editFormData={() => updateLocation(id)}
+/>
 
 <h2>Lista de Locais Favoritos:</h2>
 {#if hasList}
@@ -68,8 +96,16 @@
           </div>
         </div>
         <div class="location-actions">
-          <button type="button">Editar</button>
-          <button type="button" on:click={() => toggleFavorite(location.id)}>
+          <button
+            type="button"
+            class="edit-button"
+            on:click={() => editLocation(location.id)}>Editar</button
+          >
+          <button
+            type="button"
+            class:favorite-button={!!location.favorite}
+            on:click={() => toggleFavorite(location.id)}
+          >
             {#if location.favorite}
               Remover dos Favoritos
             {:else}
@@ -85,16 +121,25 @@
 {/if}
 
 <style>
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
   ul.location-list {
     list-style: none;
     padding: 0;
   }
 
   li {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+    background: #1f222a;
+    border: 1px solid #36393f;
+    border-radius: 10px;
     padding: 20px;
-    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .favorite-star {
@@ -105,6 +150,7 @@
 
   .field-label {
     font-weight: bold;
+    color: #fff;
   }
 
   .location-info {
@@ -117,6 +163,26 @@
   }
 
   .location-actions {
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    background-color: #2e7d32;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+
+  button.edit-button {
+    background-color: #1976d2;
+  }
+
+  button.favorite-button {
+    background-color: #f44336;
   }
 </style>

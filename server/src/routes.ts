@@ -1,112 +1,23 @@
 import { FastifyInstance } from "fastify";
-import { prisma } from "./lib/prisma";
 import {
-  getIdParam,
-  getLocationPatchBody,
-  getLocationPostBody,
-  getLocationPutBody,
-} from "./@types";
+  create,
+  getAll,
+  remove,
+  removeAll,
+  update,
+  updateFavorite,
+} from "./controllers/locations";
 
 export const appRoutes = async (app: FastifyInstance) => {
-  app.get("/locations", async () => {
-    const locations = await prisma.location.findMany({
-      orderBy: {
-        id: "asc",
-      },
-    });
-    return locations;
-  });
+  app.get("/locations", getAll);
 
-  app.post("/locations", async (request, reply) => {
-    const { local, country, description } = getLocationPostBody.parse(
-      request.body
-    );
+  app.post("/locations", create);
 
-    await prisma.location.create({
-      data: {
-        local,
-        country,
-        description,
-      },
-    });
+  app.put("/locations/:id", update);
 
-    return reply.status(201).send();
-  });
+  app.patch("/locations/:id", updateFavorite);
 
-  app.put("/locations/:id", async (request, reply) => {
-    const { id } = getIdParam.parse(request.params);
-    const { local, country, description } = getLocationPutBody.parse(
-      request.body
-    );
+  app.delete("/locations/:id", remove);
 
-    const location = await prisma.location.findUnique({
-      where: {
-        id,
-      },
-    });
-
-    if (!location) {
-      return reply.status(404).send("Localização não encontrada");
-    }
-
-    const updatedFavorite = location.favorite;
-
-    await prisma.location.update({
-      where: {
-        id,
-      },
-      data: {
-        local,
-        country,
-        description,
-        favorite: updatedFavorite,
-      },
-    });
-
-    return reply.status(204).send();
-  });
-
-  app.patch("/locations/:id", async (request, reply) => {
-    const { id } = getIdParam.parse(request.params);
-
-    const location = await prisma.location.findUnique({
-      where: {
-        id,
-      },
-    });
-
-    if (!location) {
-      return reply.status(404).send("Localização não encontrada");
-    }
-
-    const updatedFavorite = !location.favorite;
-
-    const isFavorite = await prisma.location.update({
-      where: {
-        id,
-      },
-      data: {
-        favorite: updatedFavorite,
-      },
-    });
-
-    return isFavorite.favorite;
-  });
-
-  app.delete("/locations/:id", async (request, reply) => {
-    const { id } = getIdParam.parse(request.params);
-
-    await prisma.location.delete({
-      where: {
-        id,
-      },
-    });
-
-    return reply.status(204).send();
-  });
-
-  app.delete("/locations/delete-all", async (request, reply) => {
-    await prisma.location.deleteMany();
-    return reply.status(204).send();
-  });
+  app.delete("/locations/delete-all", removeAll);
 };

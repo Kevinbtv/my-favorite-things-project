@@ -2,6 +2,7 @@
   import { createDataApi } from "../../service/api";
   import Form from "./Form.svelte";
   import type { FormData } from "./@types";
+  import axios from "axios";
 
   let local = "",
     country = "",
@@ -12,7 +13,7 @@
   $: formData = { local, country, description };
 
   const createFormData = async () => {
-    const response = await createDataApi(formData);
+    const response = await axios.post("/api/create-location", formData);
 
     if (response) {
       formData = {

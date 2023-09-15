@@ -1,11 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import AddNewPlace from "./_components/AddNewPlace.svelte";
-import Modal from "./_components/Modal/Modal.svelte";
 ---
 
 <Layout title="My Favorites Things">
-  <main>
-    <AddNewPlace client:load />
-  </main>
+  <h2>Adicione um local que gostou de visitar!</h2>
+  <AddNewPlace client:load />
 </Layout>

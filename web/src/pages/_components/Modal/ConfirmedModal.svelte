@@ -1,12 +1,8 @@
 <script lang="ts">
   import { onMount, createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
-  import AddNewPlace from "../AddNewPlace.svelte";
-  import Form from "../Form.svelte";
-  import type { FormData } from "../@types";
 
-  export let isOpen: boolean, formData: FormData;
-  $: formData;
+  export let isOpen: boolean;
 
   const dispatch = createEventDispatcher();
 
@@ -48,14 +44,17 @@
       aria-labelledby="modal-title"
       id="modal-wrapper"
     >
-      <Form
-        bind:formData
-        buttonName="Salvar"
-        submitFunction={() => dispatch("editFormData")}
-      />
-      <button type="button" on:click={closeModal} id="modal-close">
-        Fechar modal
-      </button>
+      <h3 id="modal-title">Você tem certeza?</h3>
+      <div class="button-container">
+        <button
+          type="button"
+          on:click={() => dispatch("confirmed")}
+          class="confirm-button">Sim</button
+        >
+        <button type="button" on:click={closeModal} class="cancel-button"
+          >Cancelar</button
+        >
+      </div>
     </div>
   </div>
 {/if}
@@ -81,30 +80,49 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    align-items: center;
     max-height: calc(100vh - 8rem);
     max-width: 37.625rem;
     padding: 1.5rem 4rem;
     position: relative;
+    justify-content: center;
+    height: 12.5rem;
     width: 35rem;
   }
 
-  #modal-close {
-    align-self: start;
-    background-color: #fff;
+  #modal-title {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .confirm-button,
+  .cancel-button {
+    padding: 0.5rem 1rem;
     border: none;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: transparent;
+    border-radius: 0.25rem;
     cursor: pointer;
-    font-size: 0;
-    height: 1.5rem;
-    line-height: 0;
-    margin-right: 1rem;
-    background-image: url("./assets/modal_fechar.svg");
-    margin-top: 0.5rem;
-    position: absolute;
-    right: 0;
-    text-shadow: none;
-    width: 1.5rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+
+  .confirm-button:hover {
+    background-color: #0056b3;
+  }
+
+  .cancel-button {
+    background-color: #dc3545;
+  }
+
+  .cancel-button:hover {
+    background-color: #c82333;
   }
 </style>

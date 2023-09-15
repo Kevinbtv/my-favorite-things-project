@@ -1,24 +1,27 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getDataApi, toggleFavoriteData } from "../../service/api";
+  import {
+    deleteDataApi,
+    editDataApi,
+    getDataApi,
+    toggleFavoriteData,
+  } from "../../service/api";
   import Modal from "./Modal/Modal.svelte";
+  import ConfirmedModal from "./Modal/ConfirmedModal.svelte";
+  import type { FormData, UserData } from "./@types";
 
-  interface Location {
-    id: string;
-    local: string;
-    country: string;
-    description: string;
-    favorite: boolean;
-  }
-
-  let locations: Array<Location> = [],
+  let locations: Array<UserData> = [],
     local = "",
     country = "",
     description = "",
     id = "",
     editingIndex = -1,
     hasList: boolean,
-    isOpen = false;
+    isOpen = false,
+    isOpenConfirmed = false;
+
+  let formData: FormData;
+  $: formData = { local, country, description };
 
   const getInfo = async () => {
     const response = await getDataApi();
@@ -40,44 +43,59 @@
 
   const editLocation = (identifier: string) => {
     const locationToEdit = locations.find((loc) => loc.id === identifier);
-
     if (locationToEdit) {
-      local = locationToEdit.local;
-      country = locationToEdit.country;
-      description = locationToEdit.description;
-      id = identifier;
+      ({ local, country, description, id } = locationToEdit);
       editingIndex = locations.indexOf(locationToEdit);
       isOpen = true;
     }
   };
+  const editFormData = async () => {
+    isOpen = false;
+    return await editDataApi(id, formData);
+  };
 
   const updateLocation = (identifier: string) => {
     const locationToEdit = locations.find((loc) => loc.id === identifier);
-
     if (locationToEdit) {
-      locationToEdit.local = local;
-      locationToEdit.country = country;
-      locationToEdit.description = description;
+      Object.assign(locationToEdit, formData);
       locations = [...locations];
-      isOpen = true;
+
+      editFormData();
     }
   };
+
+  const areYouSure = (identifier: string) => {
+    id = identifier;
+    isOpenConfirmed = true;
+  };
+
+  const deleteLocation = async (identifier: string) => {
+    const locationIndex = locations.findIndex((loc) => loc.id === identifier);
+    if (locationIndex !== -1) {
+      locations.splice(locationIndex, 1);
+      locations = [...locations];
+    }
+    isOpenConfirmed = false;
+    return await deleteDataApi(identifier);
+  };
+
+  $: {
+    if (locations.length === 0) {
+      hasList = false;
+    }
+  }
 
   onMount(async () => {
     await getInfo();
   });
 </script>
 
-<Modal
-  bind:local
-  bind:country
-  bind:description
-  bind:id
-  bind:isOpen
-  on:editFormData={() => updateLocation(id)}
+<Modal bind:formData bind:isOpen on:editFormData={() => updateLocation(id)} />
+<ConfirmedModal
+  bind:isOpen={isOpenConfirmed}
+  on:confirmed={() => deleteLocation(id)}
 />
 
-<h2>Lista de Locais Favoritos:</h2>
 {#if hasList}
   <ul class="location-list">
     {#each locations as location}
@@ -98,11 +116,6 @@
         <div class="location-actions">
           <button
             type="button"
-            class="edit-button"
-            on:click={() => editLocation(location.id)}>Editar</button
-          >
-          <button
-            type="button"
             class:favorite-button={!!location.favorite}
             on:click={() => toggleFavorite(location.id)}
           >
@@ -111,6 +124,19 @@
             {:else}
               Adicionar aos Favoritos
             {/if}
+          </button>
+          <button
+            type="button"
+            class="edit-button"
+            on:click={() => editLocation(location.id)}>Editar</button
+          >
+
+          <button
+            type="button"
+            class="delete-button"
+            on:click={() => areYouSure(location.id)}
+          >
+            Excluir
           </button>
         </div>
       </li>
@@ -121,11 +147,6 @@
 {/if}
 
 <style>
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-
   ul.location-list {
     list-style: none;
     padding: 0;
@@ -133,10 +154,10 @@
 
   li {
     background: #1f222a;
-    border: 1px solid #36393f;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
+    border: 0.0625rem solid #36393f;
+    border-radius: 0.625rem;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -144,8 +165,8 @@
 
   .favorite-star {
     color: gold;
-    font-size: 20px;
-    margin-right: 5px;
+    font-size: 1.25rem;
+    margin-right: 0.3125rem;
   }
 
   .field-label {
@@ -159,7 +180,7 @@
   }
 
   .location-details {
-    margin-left: 10px;
+    margin-left: 0.625rem;
   }
 
   .location-actions {
@@ -171,10 +192,10 @@
     background-color: #2e7d32;
     color: #fff;
     border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
+    border-radius: 0.3125rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 0.625rem;
     font-weight: bold;
   }
 
@@ -183,6 +204,11 @@
   }
 
   button.favorite-button {
+    color: #000;
+    background-color: #ffc107;
+  }
+
+  button.delete-button {
     background-color: #f44336;
   }
 </style>

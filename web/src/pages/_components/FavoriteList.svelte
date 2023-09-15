@@ -1,15 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getDataApi } from "../../service/api";
+  import { getDataApi, toggleFavoriteData } from "../../service/api";
+  import type { UserData } from "./@types";
 
-  interface Location {
-    local: string;
-    country: string;
-    description: string;
-    favorite: boolean;
-  }
-
-  let locations: Array<Location> = [],
+  let locations: Array<UserData> = [],
     hasFavorites = false;
 
   const getInfo = async () => {
@@ -21,44 +15,51 @@
     }
   };
 
+  const toggleFavorite = async (id: string) => {
+    const locationIndex = locations.findIndex((loc) => loc.id === id);
+    if (locationIndex !== -1) {
+      locations.splice(locationIndex, 1);
+      locations = [...locations];
+    }
+
+    return await toggleFavoriteData(id);
+  };
+
   onMount(async () => {
     await getInfo();
   });
 </script>
 
-<h2>Lista de Locais Favoritos:</h2>
 {#if hasFavorites}
   <ul class="location-list">
     {#each locations as location}
-      {#if location.favorite}
-        <li>
-          <div class="location-info">
-            <div class="location-details">
-              <p>
-                <strong class="field-label">Local:</strong>
-                {location.local}
-              </p>
-              <p>
-                <strong class="field-label">País:</strong>
-                {location.country}
-              </p>
-              <p>
-                <strong class="field-label">Descrição:</strong>
-                {location.description}
-              </p>
-            </div>
+      <li>
+        <div class="location-info">
+          <div class="location-details">
+            <p>
+              <strong class="field-label">Local:</strong>
+              {location.local}
+            </p>
+            <p>
+              <strong class="field-label">País:</strong>
+              {location.country}
+            </p>
+            <p>
+              <strong class="field-label">Descrição:</strong>
+              {location.description}
+            </p>
           </div>
-          <div class="location-actions">
-            <button type="button" class:favorite-button={!!location.favorite}>
-              {#if location.favorite}
-                Remover dos Favoritos
-              {:else}
-                Adicionar aos Favoritos
-              {/if}
-            </button>
-          </div>
-        </li>
-      {/if}
+        </div>
+        <div class="location-actions">
+          <button
+            type="button"
+            class:favorite-button={!!location.favorite}
+            on:click={() => toggleFavorite(location.id)}
+          >
+            Remover dos Favoritos
+          </button>
+        </div>
+      </li>
     {/each}
   </ul>
 {:else}
@@ -66,12 +67,6 @@
 {/if}
 
 <style>
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-
   ul.location-list {
     list-style: none;
     padding: 0;
@@ -79,10 +74,10 @@
 
   li {
     background: #1f222a;
-    border: 1px solid #36393f;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
+    border: 0.0625rem solid #36393f;
+    border-radius: 0.625rem;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -99,7 +94,7 @@
   }
 
   .location-details {
-    margin-left: 10px;
+    margin-left: 0.625rem;
   }
 
   .location-actions {
@@ -111,10 +106,10 @@
     background-color: #2e7d32;
     color: #fff;
     border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
+    border-radius: 0.3125rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 0.625rem;
     font-weight: bold;
   }
 

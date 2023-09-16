@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { getDataApi, toggleFavoriteData } from "../../service/api";
-  import type { UserData } from "./@types";
   import axios from "axios";
+  import type { UserData } from "./@types";
 
   export let locations: UserData[] = [],
     hasFavorites = false;

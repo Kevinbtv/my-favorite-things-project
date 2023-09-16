@@ -1,15 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import {
-    deleteDataApi,
-    editDataApi,
-    getDataApi,
-    toggleFavoriteData,
-  } from "../../service/api";
+  import axios from "axios";
   import Modal from "./Modal/Modal.svelte";
   import ConfirmedModal from "./Modal/ConfirmedModal.svelte";
   import type { FormData, UserData } from "./@types";
-  import axios from "axios";
 
   export let locations: UserData[] = [],
     hasList: boolean;

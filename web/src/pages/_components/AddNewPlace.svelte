@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { createDataApi } from "../../service/api";
+  import axios from "axios";
   import Form from "./Form.svelte";
   import type { FormData } from "./@types";
-  import axios from "axios";
 
   let local = "",
     country = "",

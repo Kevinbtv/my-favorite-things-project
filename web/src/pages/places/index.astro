@@ -1,8 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PlaceList from "../_components/PlaceList.svelte";
 import { getDataApi } from "../../service/api";
 import type { UserData } from "../_components/@types";
-import PlaceList from "../_components/PlaceList.svelte";
 
 let locations: UserData[] = [],
   hasList = false;

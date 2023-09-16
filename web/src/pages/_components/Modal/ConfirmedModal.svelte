@@ -110,19 +110,23 @@
     cursor: pointer;
     font-size: 1rem;
     color: #fff;
-    background-color: #007bff;
+    background-color: transparent;
     transition: background-color 0.2s, transform 0.2s;
   }
 
+  .confirm-button {
+    border: 1px solid #dc3545;
+  }
+
   .confirm-button:hover {
-    background-color: #0056b3;
+    background-color: #c82333;
   }
 
   .cancel-button {
-    background-color: #dc3545;
+    background-color: #007bff;
   }
 
   .cancel-button:hover {
-    background-color: #c82333;
+    background-color: #0056b3;
   }
 </style>

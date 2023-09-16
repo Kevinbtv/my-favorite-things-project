@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount, createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
-  import AddNewPlace from "../AddNewPlace.svelte";
   import Form from "../Form.svelte";
   import type { FormData } from "../@types";
 

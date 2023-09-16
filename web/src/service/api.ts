@@ -46,7 +46,11 @@ export const editDataApi = async (id: string, body: BodyData) => {
 
 export const toggleFavoriteData = async (id: string) => {
   try {
-    const response = await axios.patch(`${API_BASE_URL}/${id}`);
+    const response = await axios.patch(`${API_BASE_URL}/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return response;
   } catch (error) {
     handleApiError(error as AxiosError);

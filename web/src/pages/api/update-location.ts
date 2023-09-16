@@ -1,11 +1,12 @@
 import type { APIRoute } from "astro";
-import { createDataApi } from "../../service/api";
+import { editDataApi } from "../../service/api";
 
-export const POST: APIRoute = async ({ request }) => {
+export const PUT: APIRoute = async ({ request }) => {
   const response = await request.json();
+  const { id, formData } = response;
 
   try {
-    const data = await createDataApi(response);
+    const data = await editDataApi(id, formData);
 
     return new Response(null, { status: data?.status });
   } catch (error) {

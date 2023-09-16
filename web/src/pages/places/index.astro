@@ -1,9 +1,25 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getDataApi } from "../../service/api";
+import type { UserData } from "../_components/@types";
 import PlaceList from "../_components/PlaceList.svelte";
+
+let locations: UserData[] = [],
+  hasList = false;
+
+const getInfo = async () => {
+  return await getDataApi();
+};
+
+const responseGetInfo = await getInfo();
+
+if (responseGetInfo?.data) {
+  locations = responseGetInfo.data;
+  hasList = locations.some((location) => location);
+}
 ---
 
 <Layout title="Meus lugares">
   <h2>Lista de Locais que gostei de visitar:</h2>
-  <PlaceList client:load />
+  <PlaceList {locations} {hasList} client:load />
 </Layout>

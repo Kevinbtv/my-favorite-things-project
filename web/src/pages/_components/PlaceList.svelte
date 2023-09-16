@@ -9,32 +9,28 @@
   import Modal from "./Modal/Modal.svelte";
   import ConfirmedModal from "./Modal/ConfirmedModal.svelte";
   import type { FormData, UserData } from "./@types";
+  import axios from "axios";
 
-  let locations: Array<UserData> = [],
-    local = "",
+  export let locations: UserData[] = [],
+    hasList: boolean;
+
+  let local = "",
     country = "",
     description = "",
     id = "",
     editingIndex = -1,
-    hasList: boolean,
     isOpen = false,
     isOpenConfirmed = false;
 
   let formData: FormData;
   $: formData = { local, country, description };
 
-  const getInfo = async () => {
-    const response = await getDataApi();
-
-    if (response?.data) {
-      locations = response.data;
-      hasList = locations.some((location) => location);
-    }
-  };
-
-  const toggleFavorite = async (id: string) => {
-    const response = await toggleFavoriteData(id);
-    const location = locations.find((loc) => loc.id === id);
+  const toggleFavorite = async (identifier: string) => {
+    const body = {
+      id: identifier,
+    };
+    const response = await axios.patch("/api/update-favorite", body);
+    const location = locations.find((loc) => loc.id === identifier);
     if (location) {
       location.favorite = response?.data;
       locations = [...locations];
@@ -49,9 +45,14 @@
       isOpen = true;
     }
   };
+
   const editFormData = async () => {
     isOpen = false;
-    return await editDataApi(id, formData);
+    const body = {
+      id,
+      formData,
+    };
+    return await axios.put("/api/update-location", body);
   };
 
   const updateLocation = (identifier: string) => {
@@ -76,7 +77,10 @@
       locations = [...locations];
     }
     isOpenConfirmed = false;
-    return await deleteDataApi(identifier);
+    const body = {
+      id: identifier,
+    };
+    return axios.post("/api/delete-location", body);
   };
 
   $: {
@@ -84,10 +88,6 @@
       hasList = false;
     }
   }
-
-  onMount(async () => {
-    await getInfo();
-  });
 </script>
 
 <Modal bind:formData bind:isOpen on:editFormData={() => updateLocation(id)} />

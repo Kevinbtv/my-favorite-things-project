@@ -2,32 +2,26 @@
   import { onMount } from "svelte";
   import { getDataApi, toggleFavoriteData } from "../../service/api";
   import type { UserData } from "./@types";
+  import axios from "axios";
 
-  let locations: Array<UserData> = [],
+  export let locations: UserData[] = [],
     hasFavorites = false;
-
-  const getInfo = async () => {
-    const response = await getDataApi();
-
-    if (response?.data) {
-      locations = response.data;
-      hasFavorites = locations.some((location) => location.favorite);
-    }
-  };
 
   const toggleFavorite = async (id: string) => {
     const locationIndex = locations.findIndex((loc) => loc.id === id);
     if (locationIndex !== -1) {
       locations.splice(locationIndex, 1);
       locations = [...locations];
+
+      if (locations.length === 0) hasFavorites = false;
     }
 
-    return await toggleFavoriteData(id);
-  };
+    const body = {
+      id,
+    };
 
-  onMount(async () => {
-    await getInfo();
-  });
+    return await axios.patch("/api/update-favorite", body);
+  };
 </script>
 
 {#if hasFavorites}

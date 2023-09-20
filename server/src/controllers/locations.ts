@@ -5,18 +5,11 @@ import {
   getLocationPutBody,
 } from "../@types/locations";
 import { prisma } from "../lib/prisma";
-import { CustomSessionObject } from "../@types/auth";
 
 export const getAll = async (request: FastifyRequest, reply: FastifyReply) => {
+  const userId = request.user.sub;
+
   try {
-    const session = request.session as CustomSessionObject;
-
-    if (!session || !session.user) {
-      return reply.status(401).send("Usuário não autenticado");
-    }
-
-    const userId = session.user.id;
-
     const locations = await prisma.location.findMany({
       where: {
         user_id: userId,
@@ -34,14 +27,11 @@ export const getAll = async (request: FastifyRequest, reply: FastifyReply) => {
 
 export const create = async (request: FastifyRequest, reply: FastifyReply) => {
   try {
-    const session = request.session as CustomSessionObject;
-    console.log(session.user);
+    const userId = request.user.sub;
 
     const { local, country, description } = getLocationPostBody.parse(
       request.body
     );
-
-    const userId = session.user.id;
 
     await prisma.location.create({
       data: {

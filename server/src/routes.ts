@@ -10,7 +10,6 @@ import {
 import { deleteAllUsers, getAllUsers } from "./controllers/users";
 import { register } from "./controllers/register";
 import { authenticate } from "./controllers/authenticate";
-import { profile } from "./controllers/profile";
 import { verifyJwt } from "./controllers/middlewares/verify-jwt";
 
 export const appRoutes = async (app: FastifyInstance) => {

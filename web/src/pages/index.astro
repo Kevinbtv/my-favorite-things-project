@@ -1,9 +1,96 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import AddNewPlace from "./_components/AddNewPlace.svelte";
 ---
 
-<Layout title="My places">
-  <h2>Adicione um local que gostou de visitar!</h2>
-  <AddNewPlace client:load />
+<Layout title="My places" logged={false}>
+  <div class="intro-container">
+    <h2>Bem-vindo!</h2>
+    <p>
+      Registre os lugares especiais que você visitou e mantenha um diário de
+      viagens pessoais.
+    </p>
+    <a href="/session" class="cta-button">Entrar</a>
+    <a href="/register" class="cta-button">Registrar-se</a>
+  </div>
+
+  <div class="card-container">
+    <div class="card">
+      <h3>Registre seus lugares favoritos</h3>
+      <p>
+        Guarde os locais memoráveis que você explorou para preservar suas
+        lembranças.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Organize suas experiências</h3>
+      <p>
+        Crie um diário de viagens pessoais para documentar suas aventuras e
+        recordações.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Reviva suas melhores jornadas</h3>
+      <p>Reveja suas viagens passadas e compartilhe suas histórias pessoais.</p>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  .intro-container {
+    text-align: center;
+    padding: 80px;
+  }
+
+  h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: #fca311;
+    color: #13151a;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  .cta-button:hover {
+    background-color: #e5a923;
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.2rem;
+    margin-top: 40px;
+  }
+
+  .card {
+    background-color: #ffffff;
+    color: #13151a;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 30%;
+  }
+
+  .card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 16px;
+  }
+</style>

@@ -1,12 +1,12 @@
 import type { APIRoute } from "astro";
-import { deleteDataApi } from "../../service/api";
+import { editDataApi } from "../../../service/api";
 
-export const POST: APIRoute = async ({ request }) => {
+export const PUT: APIRoute = async ({ request }) => {
   const response = await request.json();
-  const { id } = response;
+  const { id, formData } = response;
 
   try {
-    const data = await deleteDataApi(id);
+    const data = await editDataApi(id, formData);
 
     return new Response(null, { status: data?.status });
   } catch (error) {

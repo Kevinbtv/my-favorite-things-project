@@ -12,7 +12,10 @@
   $: formData = { local, country, description };
 
   const createFormData = async () => {
-    const response = await axios.post("/api/create-location", formData);
+    const response = await axios.post(
+      "/api/locations/create-location",
+      formData
+    );
 
     if (response) {
       formData = {

@@ -22,7 +22,7 @@
     const body = {
       id: identifier,
     };
-    const response = await axios.patch("/api/update-favorite", body);
+    const response = await axios.patch("/api/locations/update-favorite", body);
     const location = locations.find((loc) => loc.id === identifier);
     if (location) {
       location.favorite = response?.data;
@@ -45,7 +45,7 @@
       id,
       formData,
     };
-    return await axios.put("/api/update-location", body);
+    return await axios.put("/api/locations/update-location", body);
   };
 
   const updateLocation = (identifier: string) => {
@@ -73,7 +73,7 @@
     const body = {
       id: identifier,
     };
-    return axios.post("/api/delete-location", body);
+    return axios.post("/api/locations/delete-location", body);
   };
 
   $: {

@@ -6,8 +6,4 @@ declare module "@fastify/jwt" {
       sub: string;
     };
   }
-
-  export interface VerifyPayloadType {
-    sub: string;
-  }
 }

@@ -18,7 +18,7 @@
       id,
     };
 
-    return await axios.patch("/api/update-favorite", body);
+    return await axios.patch("/api/locations/update-favorite", body);
   };
 </script>
 

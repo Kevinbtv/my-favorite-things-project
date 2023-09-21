@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { editDataApi, toggleFavoriteData } from "../../service/api";
+import { editDataApi, toggleFavoriteData } from "../../../service/api";
 
 export const PATCH: APIRoute = async ({ request }) => {
   const response = await request.json();

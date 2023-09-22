@@ -2,10 +2,12 @@ import type { APIRoute } from "astro";
 import { createDataApi } from "../../../service/api";
 
 export const POST: APIRoute = async ({ request }) => {
+  const cookie = request.headers.get("cookie") as string;
+  const token = cookie.replace("token=", "");
   const response = await request.json();
 
   try {
-    const data = await createDataApi(response);
+    const data = await createDataApi(response, token);
 
     return new Response(null, { status: data?.status });
   } catch (error) {

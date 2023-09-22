@@ -8,18 +8,30 @@ const handleApiError = (error: AxiosError) => {
   throw error;
 };
 
-export const getDataApi = async () => {
+export const getDataApi = async (token: string) => {
   try {
-    const response = await axios.get(API_BASE_URL);
+    const response = await axios.get(`${API_BASE_URL}/locations`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log(response);
     return response;
   } catch (error) {
     handleApiError(error as AxiosError);
   }
 };
 
-export const createDataApi = async (body: BodyData) => {
+export const createDataApi = async (body: string, token: string) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/locations`, body);
+    const response = await axios.post(`${API_BASE_URL}/locations`, body, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response;
   } catch (error) {
     handleApiError(error as AxiosError);
@@ -51,6 +63,15 @@ export const toggleFavoriteData = async (id: string) => {
         "Content-Type": "application/json",
       },
     });
+    return response;
+  } catch (error) {
+    handleApiError(error as AxiosError);
+  }
+};
+
+export const authenticate = async (body: string) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/sessions`, body);
     return response;
   } catch (error) {
     handleApiError(error as AxiosError);

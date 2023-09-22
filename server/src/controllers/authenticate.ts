@@ -27,7 +27,10 @@ export const authenticate = async (
     }
 
     const token = await reply.jwtSign(
-      {},
+      {
+        name: user.name,
+        email: user.email,
+      },
       {
         sign: {
           sub: user.id,

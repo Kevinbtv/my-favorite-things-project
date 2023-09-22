@@ -13,6 +13,23 @@ export const getAllUsers = async (
   }
 };
 
+export const getUser = async (
+  request: FastifyRequest,
+  reply: FastifyReply,
+  id: string
+) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return user;
+  } catch (error) {
+    return reply.status(500).send("Erro interno do servidor");
+  }
+};
+
 export const deleteAllUsers = async (
   request: FastifyRequest,
   reply: FastifyReply

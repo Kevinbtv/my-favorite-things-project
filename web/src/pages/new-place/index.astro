@@ -1,6 +1,12 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import AddNewPlace from "../_components/AddNewPlace.svelte";
+
+const token = Astro.cookies.get("token");
+
+if (!token?.value) {
+  return Astro.redirect("/");
+}
 ---
 
 <Layout title="Novo local" logged>

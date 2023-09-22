@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import {
   create,
-  getAll,
+  getLocationByUser,
   remove,
   removeAll,
   update,
@@ -11,9 +11,10 @@ import { deleteAllUsers, getAllUsers } from "./controllers/users";
 import { register } from "./controllers/register";
 import { authenticate } from "./controllers/authenticate";
 import { verifyJwt } from "./controllers/middlewares/verify-jwt";
+import { profile } from "./controllers/profile";
 
 export const appRoutes = async (app: FastifyInstance) => {
-  app.get("/locations", { onRequest: [verifyJwt] }, getAll);
+  app.get("/locations", { onRequest: [verifyJwt] }, getLocationByUser);
   app.post("/locations", { onRequest: [verifyJwt] }, create);
   app.put("/locations/:id", update);
   app.patch("/locations/:id", updateFavorite);
@@ -24,6 +25,7 @@ export const appRoutes = async (app: FastifyInstance) => {
 export const authRoutes = async (app: FastifyInstance) => {
   app.post("/register", register);
   app.post("/sessions", authenticate);
+  app.post("/me", { onRequest: [verifyJwt] }, profile);
 };
 
 export const userRoutes = async (app: FastifyInstance) => {

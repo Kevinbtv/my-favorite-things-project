@@ -6,7 +6,10 @@ import {
 } from "../@types/locations";
 import { prisma } from "../lib/prisma";
 
-export const getAll = async (request: FastifyRequest, reply: FastifyReply) => {
+export const getLocationByUser = async (
+  request: FastifyRequest,
+  reply: FastifyReply
+) => {
   const userId = request.user.sub;
 
   try {

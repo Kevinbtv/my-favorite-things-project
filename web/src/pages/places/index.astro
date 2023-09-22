@@ -4,11 +4,14 @@ import PlaceList from "../_components/PlaceList.svelte";
 import { getDataApi } from "../../service/api";
 import type { UserData } from "../_components/@types";
 
+const token = Astro.cookies.get("token")?.value;
+
 let locations: UserData[] = [],
   hasList = false;
 
 const getInfo = async () => {
-  return await getDataApi();
+  const response = await getDataApi(token as string);
+  return response;
 };
 
 const responseGetInfo = await getInfo();
@@ -19,7 +22,7 @@ if (responseGetInfo?.data) {
 }
 ---
 
-<Layout title="Meus lugares">
+<Layout title="Meus lugares" logged>
   <h2>Lista de Locais que gostei de visitar:</h2>
   <PlaceList {locations} {hasList} client:load />
 </Layout>

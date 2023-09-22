@@ -1,5 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const token = Astro.cookies.get("token");
+
+if (token?.value) {
+  return Astro.redirect("/new-place");
+}
 ---
 
 <Layout title="My places" logged={false}>

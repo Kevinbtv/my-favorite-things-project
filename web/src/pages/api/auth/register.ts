@@ -3,7 +3,6 @@ import { register } from "../../../service/api";
 
 export const POST: APIRoute = async ({ request }) => {
   const response = await request.json();
-  console.log(response);
 
   try {
     const data = await register(response);

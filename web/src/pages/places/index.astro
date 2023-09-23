@@ -2,9 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 import PlaceList from '../_components/PlaceList.svelte';
 import { getDataApi } from '../../service/api';
+import jwt from '../../service/jwt';
 import type { UserData } from '../_components/@types';
 
-const token = Astro.cookies.get('token')?.value;
+const authorization = Astro.cookies.get('authorization')?.value;
+const token = jwt(authorization);
 
 if (!token) {
 	return Astro.redirect('/');
@@ -14,7 +16,7 @@ let locations: UserData[] = [],
 	hasList = false;
 
 const getInfo = async () => {
-	const response = await getDataApi(token as string);
+	const response = await getDataApi(authorization as string);
 	return response;
 };
 

@@ -44,7 +44,7 @@
 
 		try {
 			const response = await axios.post('/api/auth/session', body);
-			Cookies.set('token', response.data.token);
+			Cookies.set('authorization', response.data.token);
 
 			if (response.data) {
 				window.location.assign('/new-place');

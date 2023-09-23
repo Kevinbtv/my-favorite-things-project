@@ -1,8 +1,8 @@
 ---
-const token = Astro.cookies.get('token')?.value;
+const authorization = Astro.cookies.get('authorization')?.value;
 
-if (token) {
-	Astro.cookies.delete('token');
-	return Astro.redirect('/');
+if (authorization) {
+	Astro.cookies.delete('authorization');
 }
+return Astro.redirect('/');
 ---

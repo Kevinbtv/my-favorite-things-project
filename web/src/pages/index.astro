@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import jwt from '../service/jwt';
 
-const token = Astro.cookies.get('token')?.value;
+const authorization = Astro.cookies.get('authorization')?.value;
+const token = jwt(authorization);
 
 if (token) {
 	return Astro.redirect('/new-place');

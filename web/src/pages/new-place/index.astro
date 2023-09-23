@@ -1,8 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import jwt from '../../service/jwt';
 import AddNewPlace from '../_components/AddNewPlace.svelte';
 
-const token = Astro.cookies.get('token')?.value;
+const authorization = Astro.cookies.get('authorization')?.value as string;
+const token = jwt(authorization);
 
 if (!token) {
 	return Astro.redirect('/');
@@ -11,5 +13,5 @@ if (!token) {
 
 <Layout title='Novo local' logged>
 	<h2>Adicione um local que gostou de visitar!</h2>
-	<AddNewPlace client:load {token} />
+	<AddNewPlace client:load token={authorization} />
 </Layout>

@@ -116,13 +116,13 @@ Aqui, o usuário pode adicionar informações sobre suas viagens.
 
 Nesta página, o usuário pode visualizar todas as suas viagens, além de favoritá-las, editá-las e excluí-las.
 
-![minhas-viagens](https://github.com/Kevinbtv/my-trips/assets/86861379/f485169a-e473-4fa3-9056-e4be508ce5b9)
+![minhas-viagens](https://github.com/Kevinbtv/my-trips/assets/86861379/ea4a9d60-f860-4652-9b5f-da944f25ad78)
 
 #### Minhas Viagens Favoritas
 
 Esta página exibe todas as viagens favoritas do usuário, e ele pode removê-las se desejar.
 
-![favoritas](https://github.com/Kevinbtv/my-trips/assets/86861379/6a74cc70-0dff-4f31-aab8-149fb1706aae)
+![favoritos](https://github.com/Kevinbtv/my-trips/assets/86861379/7796003a-512c-4136-9bc7-6f68dd329993)
 
 ## Deploy
 

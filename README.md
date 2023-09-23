@@ -136,7 +136,7 @@ Esta página exibe todas as viagens favoritas do usuário, e ele pode removê-la
 
 - Ter o [Docker](https://docs.docker.com/get-docker/) e o [Docker Compose](https://docs.docker.com/compose/) instalados em sua máquina.
 - Clonar este repositório.
-- Criar um arquivo `.env` na raiz do projeto, com base no [.env.example](https://github.com/Kevinbtv/my-trips/blob/main/server/.env.sample), definindo os valores de cada variável de ambiente utilizada.
+- Criar um arquivo `.env` na pasta `server`, com base no [.env.example](https://github.com/Kevinbtv/my-trips/blob/main/server/.env.sample), definindo os valores de cada variável de ambiente utilizada.
 
 ### Passo a Passo
 

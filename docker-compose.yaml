@@ -23,7 +23,8 @@ services:
   frontend:
     build:
       context: web/.
-    network_mode: "host"
+    ports:
+      - 3000:3000
     depends_on:
       - backend
     volumes:

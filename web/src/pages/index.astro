@@ -1,102 +1,103 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from '../layouts/Layout.astro';
 
-const token = Astro.cookies.get("token")?.value;
+const token = Astro.cookies.get('token')?.value;
 
 if (token) {
-  return Astro.redirect("/new-place");
+	return Astro.redirect('/new-place');
 }
 ---
 
-<Layout title="My places" logged={false}>
-  <div class="intro-container">
-    <h2>Bem-vindo!</h2>
-    <p>
-      Registre os lugares especiais que você visitou e mantenha um diário de
-      viagens pessoais.
-    </p>
-    <a href="/session" class="cta-button">Entrar</a>
-    <a href="/register" class="cta-button">Registrar-se</a>
-  </div>
+<Layout title='My places' logged={false}>
+	<section class='intro-container'>
+		<h2>Bem-vindo!</h2>
+		<p>
+			Registre os lugares especiais que você visitou e mantenha um diário de
+			viagens pessoais.
+		</p>
+		<a href='/session' class='cta-button'>Entrar</a>
+		<a href='/register' class='cta-button'>Registrar-se</a>
+	</section>
 
-  <div class="card-container">
-    <div class="card">
-      <h3>Registre suas viagens favoritas</h3>
-      <p>
-        Guarde os locais memoráveis que você explorou para preservar suas
-        lembranças.
-      </p>
-    </div>
+	<section class='card-container'>
+		<article class='card'>
+			<h3>Registre suas viagens favoritas</h3>
+			<p>
+				Guarde os locais memoráveis que você explorou para preservar suas
+				lembranças.
+			</p>
+		</article>
 
-    <div class="card">
-      <h3>Organize suas experiências</h3>
-      <p>
-        Crie um diário de viagens pessoais para documentar suas aventuras e
-        recordações.
-      </p>
-    </div>
+		<article class='card'>
+			<h3>Organize suas experiências</h3>
+			<p>
+				Crie um diário de viagens pessoais para documentar suas aventuras e
+				recordações.
+			</p>
+		</article>
 
-    <div class="card">
-      <h3>Reviva suas melhores jornadas</h3>
-      <p>Reveja suas viagens passadas e compartilhe suas histórias pessoais.</p>
-    </div>
-  </div>
+		<article class='card'>
+			<h3>Reviva suas melhores jornadas</h3>
+			<p>Reveja suas viagens passadas e compartilhe suas histórias pessoais.</p>
+		</article>
+	</section>
 </Layout>
 
-<style>
-  .intro-container {
-    text-align: center;
-    padding: 80px;
-  }
+<style lang='scss'>
+	.intro-container {
+		text-align: center;
+		padding: 5rem;
 
-  h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
+		h2 {
+			font-size: 2.25rem;
+			margin-bottom: 1.25rem;
+		}
 
-  p {
-    font-size: 18px;
-    margin-bottom: 40px;
-  }
+		p {
+			font-size: 1.125rem;
+			margin-bottom: 2.5rem;
+		}
+	}
 
-  .cta-button {
-    display: inline-block;
-    background-color: #fca311;
-    color: #13151a;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 18px;
-    margin-right: 10px;
-  }
+	.cta-button {
+		display: inline-block;
+		background-color: #3498db;
+		color: #fff;
+		padding: 0.625rem 1.25rem;
+		border-radius: 0.3125rem;
+		text-decoration: none;
+		font-size: 1.125rem;
+		margin-right: 0.625rem;
+		transition: background-color 0.3s;
 
-  .cta-button:hover {
-    background-color: #e5a923;
-  }
+		&:hover {
+			background-color: #2980b9;
+		}
+	}
 
-  .card-container {
-    display: flex;
-    justify-content: space-around;
-    gap: 1.2rem;
-    margin-top: 40px;
-  }
+	.card-container {
+		display: flex;
+		justify-content: space-around;
+		gap: 1.2rem;
+		margin-top: 2.5rem;
 
-  .card {
-    background-color: #ffffff;
-    color: #13151a;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 30%;
-  }
+		.card {
+			background-color: #ffffff;
+			color: #13151a;
+			padding: 1.25rem;
+			border-radius: 0.3125rem;
+			box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+			text-align: center;
+			width: 30%;
 
-  .card h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
+			h3 {
+				font-size: 1.5rem;
+				margin-bottom: 0.625rem;
+			}
 
-  .card p {
-    font-size: 16px;
-  }
+			p {
+				font-size: 1rem;
+			}
+		}
+	}
 </style>

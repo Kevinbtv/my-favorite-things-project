@@ -1,13 +1,13 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import UserSession from "../_components/UserSession.svelte";
+import Layout from '../../layouts/Layout.astro';
+import UserSession from '../_components/UserSession.svelte';
 ---
 
-<Layout title="Registro" logged={false}>
-  <UserSession
-    title="Registro"
-    buttonText="Registrar-se"
-    isRegister
-    client:load
-  />
+<Layout title='Registro' logged={false}>
+	<UserSession
+		title='Registro'
+		buttonText='Registrar-se'
+		isRegister
+		client:load
+	/>
 </Layout>

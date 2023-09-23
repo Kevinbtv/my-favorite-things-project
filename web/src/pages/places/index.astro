@@ -1,32 +1,32 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import PlaceList from "../_components/PlaceList.svelte";
-import { getDataApi } from "../../service/api";
-import type { UserData } from "../_components/@types";
+import Layout from '../../layouts/Layout.astro';
+import PlaceList from '../_components/PlaceList.svelte';
+import { getDataApi } from '../../service/api';
+import type { UserData } from '../_components/@types';
 
-const token = Astro.cookies.get("token")?.value;
+const token = Astro.cookies.get('token')?.value;
 
 if (!token) {
-  return Astro.redirect("/");
+	return Astro.redirect('/');
 }
 
 let locations: UserData[] = [],
-  hasList = false;
+	hasList = false;
 
 const getInfo = async () => {
-  const response = await getDataApi(token as string);
-  return response;
+	const response = await getDataApi(token as string);
+	return response;
 };
 
 const responseGetInfo = await getInfo();
 
 if (responseGetInfo?.data) {
-  locations = responseGetInfo.data;
-  hasList = locations.some((location) => location);
+	locations = responseGetInfo.data;
+	hasList = locations.some((location) => location);
 }
 ---
 
-<Layout title="Meus lugares" logged>
-  <h2>Lista de Locais que gostei de visitar:</h2>
-  <PlaceList {locations} {hasList} client:load />
+<Layout title='Meus lugares' logged>
+	<h2>Lista de Locais que gostei de visitar:</h2>
+	<PlaceList {locations} {hasList} client:load />
 </Layout>

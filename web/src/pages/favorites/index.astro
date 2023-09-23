@@ -1,36 +1,36 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import FavoriteList from "../_components/FavoriteList.svelte";
-import { getDataApi } from "../../service/api";
-import type { UserData } from "../_components/@types";
+import Layout from '../../layouts/Layout.astro';
+import FavoriteList from '../_components/FavoriteList.svelte';
+import { getDataApi } from '../../service/api';
+import type { UserData } from '../_components/@types';
 
-const token = Astro.cookies.get("token")?.value;
+const token = Astro.cookies.get('token')?.value;
 
 if (!token) {
-  return Astro.redirect("/");
+	return Astro.redirect('/');
 }
 
 let locations: UserData[] = [],
-  hasFavorites = false;
+	hasFavorites = false;
 
 const getInfo = async () => {
-  const response = await getDataApi(token as string);
-  return response;
+	const response = await getDataApi(token as string);
+	return response;
 };
 
 const responseGetInfo = await getInfo();
 
 if (responseGetInfo?.data) {
-  const favoriteList = responseGetInfo.data.filter(
-    (element: UserData) => element.favorite
-  );
+	const favoriteList = responseGetInfo.data.filter(
+		(element: UserData) => element.favorite
+	);
 
-  locations = favoriteList;
-  hasFavorites = locations.some((location) => location.favorite);
+	locations = favoriteList;
+	hasFavorites = locations.some((location) => location.favorite);
 }
 ---
 
-<Layout title="Meus favoritos" logged>
-  <h2>Lista de Locais Favoritos:</h2>
-  <FavoriteList {locations} {hasFavorites} client:load />
+<Layout title='Meus favoritos' logged>
+	<h2>Lista de Locais Favoritos:</h2>
+	<FavoriteList {locations} {hasFavorites} client:load />
 </Layout>

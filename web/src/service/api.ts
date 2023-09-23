@@ -17,7 +17,6 @@ export const getDataApi = async (token: string) => {
       },
     });
 
-    console.log(response);
     return response;
   } catch (error) {
     handleApiError(error as AxiosError);
@@ -70,19 +69,12 @@ export const toggleFavoriteData = async (id: string) => {
 };
 
 export const authenticate = async (body: string) => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/sessions`, body);
-    return response;
-  } catch (error) {
-    handleApiError(error as AxiosError);
-  }
+  const response = await axios.post(`${API_BASE_URL}/sessions`, body);
+  return response;
 };
 
 export const register = async (body: string) => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/register`, body);
-    return response;
-  } catch (error) {
-    handleApiError(error as AxiosError);
-  }
+  const response = await axios.post(`${API_BASE_URL}/register`, body);
+
+  return response;
 };

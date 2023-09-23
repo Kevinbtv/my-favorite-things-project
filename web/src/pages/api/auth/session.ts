@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
-import { authenticate, register } from "../../../service/api";
+import { authenticate } from "../../../service/api";
+import type { AxiosError } from "axios";
 
 export const POST: APIRoute = async ({ request }) => {
   const response = await request.json();
@@ -9,8 +10,9 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify(data?.data), { status: data?.status });
   } catch (error) {
-    return new Response(JSON.stringify({ error: "An error occurred" }), {
-      status: 500,
+    const AxiosError = error as AxiosError;
+    return new Response(JSON.stringify(AxiosError.response?.data), {
+      status: AxiosError.response?.status,
     });
   }
 };

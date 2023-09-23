@@ -6,6 +6,10 @@ import type { UserData } from "../_components/@types";
 
 const token = Astro.cookies.get("token")?.value;
 
+if (!token) {
+  return Astro.redirect("/");
+}
+
 let locations: UserData[] = [],
   hasList = false;
 

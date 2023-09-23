@@ -2,14 +2,14 @@
 import Layout from "../../layouts/Layout.astro";
 import AddNewPlace from "../_components/AddNewPlace.svelte";
 
-const token = Astro.cookies.get("token");
+const token = Astro.cookies.get("token")?.value;
 
-if (!token?.value) {
+if (!token) {
   return Astro.redirect("/");
 }
 ---
 
 <Layout title="Novo local" logged>
   <h2>Adicione um local que gostou de visitar!</h2>
-  <AddNewPlace client:load />
+  <AddNewPlace client:load {token} />
 </Layout>

@@ -4,11 +4,18 @@ import FavoriteList from "../_components/FavoriteList.svelte";
 import { getDataApi } from "../../service/api";
 import type { UserData } from "../_components/@types";
 
+const token = Astro.cookies.get("token")?.value;
+
+if (!token) {
+  return Astro.redirect("/");
+}
+
 let locations: UserData[] = [],
   hasFavorites = false;
 
 const getInfo = async () => {
-  return await getDataApi();
+  const response = await getDataApi(token as string);
+  return response;
 };
 
 const responseGetInfo = await getInfo();
@@ -23,7 +30,7 @@ if (responseGetInfo?.data) {
 }
 ---
 
-<Layout title="Meus favoritos">
+<Layout title="Meus favoritos" logged>
   <h2>Lista de Locais Favoritos:</h2>
   <FavoriteList {locations} {hasFavorites} client:load />
 </Layout>

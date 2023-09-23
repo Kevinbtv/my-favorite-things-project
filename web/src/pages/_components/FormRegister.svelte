@@ -2,7 +2,10 @@
   export let title: string,
     onSubmit: () => void,
     isRegister = false,
-    buttonText = "";
+    buttonText = "",
+    incorrectPassword: boolean,
+    incorrectUser: boolean,
+    userWithSameEmail: boolean;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -18,10 +21,18 @@
   <div class="form-group">
     <label for="email">E-mail</label>
     <input type="email" id="email" name="email" required />
+    {#if incorrectUser}
+      <span>E-mail não cadastrado</span>
+    {:else if userWithSameEmail}
+      <span>E-mail já cadastrado</span>
+    {/if}
   </div>
   <div class="form-group">
     <label for="password">Senha</label>
     <input type="password" id="password" name="password" required />
+    {#if incorrectPassword}
+      <p>Senha incorreta</p>
+    {/if}
   </div>
   <button type="submit">{buttonText}</button>
 </form>
@@ -42,6 +53,12 @@
     font-size: 24px;
     margin-bottom: 20px;
     text-align: center;
+  }
+
+  span {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 14px;
   }
 
   .form-group {

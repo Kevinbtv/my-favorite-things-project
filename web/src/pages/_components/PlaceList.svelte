@@ -190,6 +190,7 @@
     cursor: pointer;
     margin-left: 0.625rem;
     font-weight: bold;
+    transition: background-color 0.3s, color 0.3s; /* Add transition for smooth effect */
   }
 
   button.edit-button {
@@ -203,5 +204,19 @@
 
   button.delete-button {
     background-color: #f44336;
+  }
+
+  /* Add hover effect for each button */
+  button.edit-button:hover {
+    background-color: #1565c0; /* Change the background color on hover */
+  }
+
+  button.favorite-button:hover {
+    background-color: #ffab00; /* Change the background color on hover */
+    color: #000; /* Change text color on hover */
+  }
+
+  button.delete-button:hover {
+    background-color: #d32f2f; /* Change the background color on hover */
   }
 </style>

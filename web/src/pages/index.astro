@@ -1,9 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const token = Astro.cookies.get("token");
+const token = Astro.cookies.get("token")?.value;
 
-if (token?.value) {
+if (token) {
   return Astro.redirect("/new-place");
 }
 ---
@@ -21,7 +21,7 @@ if (token?.value) {
 
   <div class="card-container">
     <div class="card">
-      <h3>Registre seus lugares favoritos</h3>
+      <h3>Registre suas viagens favoritas</h3>
       <p>
         Guarde os locais memoráveis que você explorou para preservar suas
         lembranças.

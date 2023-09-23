@@ -3,6 +3,8 @@
   import Form from "./Form.svelte";
   import type { FormData } from "./@types";
 
+  export let token: string;
+
   let local = "",
     country = "",
     description = "",
@@ -12,10 +14,10 @@
   $: formData = { local, country, description };
 
   const createFormData = async () => {
-    const response = await axios.post(
-      "/api/locations/create-location",
-      formData
-    );
+    const response = await axios.post("/api/locations/create-location", {
+      formData,
+      token,
+    });
 
     if (response) {
       formData = {

@@ -12,6 +12,49 @@ if (!token) {
 ---
 
 <Layout title='Novo local' logged>
-	<h2>Adicione um local que gostou de visitar!</h2>
-	<AddNewPlace client:load token={authorization} />
+	<section>
+		<article>
+			<h2>Adicione um local que gostou de visitar!</h2>
+			<AddNewPlace client:load token={authorization} />
+		</article>
+		<aside>
+			<p>
+				Viajar é uma experiência enriquecedora que nos permite explorar novos
+				lugares, culturas e criar memórias duradouras. Queremos ouvir sobre a
+				sua viagem favorita e inspirar outros a descobrirem o mundo. Preencha os
+				campos abaixo com entusiasmo e detalhes, compartilhando o local e país
+				que cativaram o seu coração, e descreva essa jornada única que deixou
+				uma marca indelével em sua vida. Vamos juntos transformar histórias em
+				inspiração e ajudar outros a planejar suas próprias aventuras!
+			</p>
+		</aside>
+	</section>
 </Layout>
+
+<style lang='scss'>
+	section {
+		align-items: center;
+		display: grid;
+		gap: 2.5rem;
+		grid-template-columns: repeat(3, 1fr);
+		width: 100%;
+
+		article {
+			grid-column: 1 / span 2;
+		}
+
+		aside {
+			background: #1f222a;
+			border-radius: 0.625rem;
+			border: 0.0625rem solid #36393f;
+			grid-column: 3;
+			height: max-content;
+			padding: 1rem;
+			width: 100%;
+
+			p {
+				text-align: justify;
+			}
+		}
+	}
+</style>

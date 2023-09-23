@@ -13,14 +13,16 @@
 	on:submit|preventDefault={submitFunction}
 	on:click={() => (feedBack = '')}
 >
-	<label>
-		Local:
-		<input type="text" bind:value={formData.local} required />
-	</label>
-	<label>
-		País:
-		<input type="text" bind:value={formData.country} required />
-	</label>
+	<div class="places">
+		<label>
+			Local:
+			<input type="text" bind:value={formData.local} required />
+		</label>
+		<label>
+			País:
+			<input type="text" bind:value={formData.country} required />
+		</label>
+	</div>
 	<label>
 		Descrição:
 		<textarea bind:value={formData.description} required />
@@ -34,9 +36,15 @@
 
 <style lang="scss">
 	form {
+		.places {
+			display: flex;
+			gap: 1rem;
+		}
+
 		label {
 			display: block;
 			margin-bottom: 0.625rem;
+			width: 100%;
 
 			input,
 			textarea {

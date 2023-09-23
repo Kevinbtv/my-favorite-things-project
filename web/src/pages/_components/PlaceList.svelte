@@ -157,6 +157,7 @@
 			.location-info {
 				align-items: center;
 				display: flex;
+				width: 60%;
 
 				.favorite-star {
 					color: gold;
@@ -166,6 +167,10 @@
 
 				.location-details {
 					margin-left: 0.625rem;
+
+					p {
+						text-align: justify;
+					}
 
 					.field-label {
 						color: #fff;

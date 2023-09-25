@@ -25,7 +25,7 @@
 {#if hasFavorites}
 	<ul class="location-list">
 		{#each locations as location}
-			<li>
+			<li class="location-card">
 				<div class="location-info">
 					<div class="location-details">
 						<p>
@@ -41,17 +41,17 @@
 							{location.description}
 						</p>
 					</div>
+					<div class="location-actions">
+						<button
+							type="button"
+							class:favorite-button={!!location.favorite}
+							on:click={() => toggleFavorite(location.id)}
+						>
+							Remover dos Favoritos
+						</button>
+					</div>
 				</div>
 			</li>
-			<div class="location-actions">
-				<button
-					type="button"
-					class:favorite-button={!!location.favorite}
-					on:click={() => toggleFavorite(location.id)}
-				>
-					Remover dos Favoritos
-				</button>
-			</div>
 		{/each}
 	</ul>
 {:else}
@@ -60,21 +60,21 @@
 
 <style lang="scss">
 	.location-list {
-		align-items: center;
-		background: #1f222a;
-		border-radius: 0.625rem;
-		border: 0.0625rem solid #36393f;
-		display: grid;
-		gap: 2.5rem;
-		grid-template-columns: auto 20%;
 		list-style: none;
-		margin-bottom: 1.25rem;
-		padding: 1.25rem;
+		padding: 0;
+		display: flex;
 
-		li {
+		.location-card {
+			padding: 1.25rem;
+			background: #1f222a;
+			border-radius: 0.625rem;
+			border: 0.0625rem solid #36393f;
+			margin-bottom: 1rem;
+
 			.location-info {
 				align-items: center;
-				display: flex;
+				display: grid;
+				gap: 1rem;
 
 				.location-details {
 					margin-left: 0.625rem;
@@ -89,26 +89,26 @@
 					}
 				}
 			}
-		}
 
-		.location-actions {
-			width: 100%;
-			button {
-				background-color: #2e7d32;
-				border-radius: 0.3125rem;
-				border: none;
-				color: #fff;
-				cursor: pointer;
-				font-weight: bold;
-				margin-left: 0.625rem;
-				padding: 0.5rem 1rem;
-				transition: background-color 0.3s;
+			.location-actions {
+				button {
+					background-color: #2e7d32;
+					border-radius: 0.3125rem;
+					border: none;
+					color: #fff;
+					cursor: pointer;
+					font-weight: bold;
+					margin-left: 0.625rem;
+					padding: 0.5rem 1rem;
+					transition: background-color 0.3s;
 
-				&.favorite-button {
-					background-color: #f44336;
+					&.favorite-button {
+						background-color: #ffc107;
+						color: #000;
 
-					&:hover {
-						background-color: #d32f2f;
+						&:hover {
+							background-color: #ffab00;
+						}
 					}
 				}
 			}

@@ -145,19 +145,18 @@
 		padding: 0;
 
 		li {
-			align-items: center;
 			background: #1f222a;
 			border-radius: 0.625rem;
 			border: 0.0625rem solid #36393f;
 			display: flex;
-			justify-content: space-between;
+			flex-direction: column;
 			margin-bottom: 1.25rem;
 			padding: 1.25rem;
 
 			.location-info {
 				align-items: center;
 				display: flex;
-				width: 60%;
+				margin-bottom: 1rem;
 
 				.favorite-star {
 					color: gold;
@@ -215,7 +214,6 @@
 
 			&:hover {
 				background-color: #ffab00;
-				color: #000;
 			}
 		}
 

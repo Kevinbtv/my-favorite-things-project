@@ -36,23 +36,23 @@ Aqui estão as tabelas do banco de dados:
 
 ### Tabela de Usuários
 
-| Coluna | Tipo | Descrição |
-| --- | --- | --- |
-| `id` | `String` | Identificador único do usuário. (Padrão: UUID) |
-| `name` | `String` | Nome do usuário. |
-| `email` | `String` | Email único do usuário. |
+| Coluna     | Tipo     | Descrição                                      |
+| ---------- | -------- | ---------------------------------------------- |
+| `id`       | `String` | Identificador único do usuário. (Padrão: UUID) |
+| `name`     | `String` | Nome do usuário.                               |
+| `email`    | `String` | Email único do usuário.                        |
 | `password` | `String` | Senha do usuário (armazenada de forma segura). |
 
 ### Tabela de Viagens
 
-| Coluna | Tipo | Descrição |
-| --- | --- | --- |
-| `id` | `String` | Identificador único da viagem. (Padrão: UUID) |
-| `local` | `String` | Local da viagem. |
-| `country` | `String` | País da viagem. |
-| `description` | `String` | Descrição da viagem (Opcional). |
-| `favorita` | `Boolean` | Indica se a viagem é favorita ou não (Padrão: `false`). |
-| `user_id` | `String` | Identificador único do usuário que fez a viagem. |
+| Coluna        | Tipo      | Descrição                                               |
+| ------------- | --------- | ------------------------------------------------------- |
+| `id`          | `String`  | Identificador único da viagem. (Padrão: UUID)           |
+| `local`       | `String`  | Local da viagem.                                        |
+| `country`     | `String`  | País da viagem.                                         |
+| `description` | `String`  | Descrição da viagem (Opcional).                         |
+| `favorita`    | `Boolean` | Indica se a viagem é favorita ou não (Padrão: `false`). |
+| `user_id`     | `String`  | Identificador único do usuário que fez a viagem.        |
 
 ### API
 
@@ -89,10 +89,10 @@ Para desenvolver a interface do usuário, utilizamos as seguintes tecnologias:
 Ao acessar qualquer uma das páginas, se um token válido estiver presente, o usuário será redirecionado automaticamente para a página de viagens.
 
 #### Página inicial
+
 Esta é a página de inicial, onde o usuário poderá ver informações sobre a aplicação. Assim como, botões para registrar ou efetuar um login.
 
 ![pagina-inicial](https://github.com/Kevinbtv/my-trips/assets/86861379/b3435739-f42b-43ed-94e7-e5cc5fefcdd9)
-
 
 #### Login
 
@@ -136,13 +136,13 @@ Esta página exibe todas as viagens favoritas do usuário, e ele pode removê-la
 
 - Ter o [Docker](https://docs.docker.com/get-docker/) e o [Docker Compose](https://docs.docker.com/compose/) instalados em sua máquina.
 - Clonar este repositório.
-- Criar um arquivo `.env` na pasta `server`, com base no [.env.example](https://github.com/Kevinbtv/my-trips/blob/main/server/.env.sample), definindo os valores de cada variável de ambiente utilizada.
 
 ### Passo a Passo
 
 Com os pré-requisitos atendidos, siga os seguintes passos para executar o projeto:
 
 1. Na raiz do projeto, execute o seguinte comando para iniciar os containers da aplicação:
+   Obs: Ao rodar o comando, será criado automaticamente o arquivo `server/.env`, copiando do `server/.env.sample`
 
 ```bash
 make start

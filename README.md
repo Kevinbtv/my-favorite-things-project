@@ -79,10 +79,12 @@ Para desenvolver a interface do usuário, utilizamos as seguintes tecnologias:
 
 - `Astro`: para gerenciar a aplicação no lado do servidor.
 - `Svelte`: para gerenciar a aplicação no lado do cliente.
+- `TypeScript`: para adicionar a tipagem estática do projeto.
 - `Axios`: para realizar requisições à API.
-- `js-cookie`: para armazenar o token de acesso do usuário.
-- `jsonwebtoken`: para decodificar e validar os tokens JWT.
-- `sass`: para estilizar a interface do usuário.
+- `Js-cookie`: para armazenar o token de acesso do usuário.
+- `Jsonwebtoken`: para decodificar e validar os tokens JWT.
+- `Sass`: para estilizar a interface do usuário.
+- `Prettier`: para formatação automática do código.
 
 ### Páginas
 

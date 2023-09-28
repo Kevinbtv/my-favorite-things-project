@@ -1,0 +1,5 @@
+@import './colors';
+
+@function my-trips-color($color) {
+	@return map-get($my-trips-colors, $color);
+}

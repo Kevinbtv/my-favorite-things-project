@@ -142,7 +142,8 @@ Esta página exibe todas as viagens favoritas do usuário, e ele pode removê-la
 Com os pré-requisitos atendidos, siga os seguintes passos para executar o projeto:
 
 1. Na raiz do projeto, execute o seguinte comando para iniciar os containers da aplicação:
-   Obs: Ao rodar o comando, será criado automaticamente o arquivo `server/.env`, copiando do `server/.env.sample`
+
+- Obs: Ao rodar o comando, será criado automaticamente o arquivo `server/.env`, copiando do `server/.env.sample`
 
 ```bash
 make start

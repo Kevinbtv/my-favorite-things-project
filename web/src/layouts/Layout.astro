@@ -1,62 +1,84 @@
 ---
-import LoggedHeader from "./components/LoggedHeader.astro";
-import UnloggedHeader from "./components/UnloggedHeader.astro";
+import LoggedHeader from './components/LoggedHeader.astro';
+import UnloggedHeader from './components/UnloggedHeader.astro';
 interface Props {
-  title: string;
-  logged: boolean;
+	title: string;
+	logged: boolean;
 }
 
 const { title, logged } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-  </head>
-  <body>
-    {logged ? <LoggedHeader /> : <UnloggedHeader />}
-    <main>
-      <slot />
-    </main>
-  </body>
+<html lang='en'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='description' content='Astro description' />
+		<meta name='viewport' content='width=device-width' />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<meta name='generator' content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		{logged ? <LoggedHeader /> : <UnloggedHeader />}
+		<main>
+			<slot />
+		</main>
+	</body>
 </html>
-<style is:global lang="scss">
-  html {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-  }
+<style is:global lang='scss'>
+	html {
+		background: #13151a;
+		font-family: system-ui, sans-serif;
+	}
 
-  main {
-    align-items: stretch;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 64rem;
-  }
+	a {
+		color: #fff;
+		text-decoration: none;
+	}
 
-  header {
-    align-items: center;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    width: 100%;
-    width: 64rem;
+	main {
+		align-items: stretch;
+		color: #fff;
+		display: flex;
+		flex-direction: column;
+		margin: 0 auto;
+		width: 64rem;
+	}
 
-    nav {
-      display: flex;
-      gap: 1rem;
-      a {
-        color: white;
-        text-decoration: none;
-      }
-    }
-  }
+	header {
+		align-items: center;
+		color: #fff;
+		display: flex;
+		justify-content: space-between;
+		margin: 0 auto;
+		width: 100%;
+		width: 64rem;
+
+		nav {
+			display: flex;
+			gap: 1rem;
+
+			a {
+				padding-bottom: 0.5rem;
+				position: relative;
+				transition: color 0.3s ease;
+
+				&::before {
+					background-color: #fff;
+					bottom: 0;
+					content: '';
+					height: 1px;
+					left: 0;
+					position: absolute;
+					transition: width 0.3s ease;
+					width: 0;
+				}
+
+				&:hover::before {
+					width: 100%;
+				}
+			}
+		}
+	}
 </style>

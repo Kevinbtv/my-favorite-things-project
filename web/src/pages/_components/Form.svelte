@@ -54,7 +54,7 @@
 				border: 0.0625rem solid my-trips-color(light-gray);
 				box-sizing: border-box;
 				font: inherit;
-				margin-bottom: 0.625rem;
+				margin: 0.5rem 0;
 				padding: 0.625rem;
 				width: 100%;
 			}

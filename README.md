@@ -145,7 +145,7 @@ Com os pré-requisitos atendidos, siga os seguintes passos para executar o proje
 
 1. Na raiz do projeto, execute o seguinte comando para iniciar os containers da aplicação:
 
-- Obs: Ao rodar o comando, será criado automaticamente o arquivo `server/.env`, copiando do `server/.env.sample`
+- Obs: Ao rodar o comando, será criado automaticamente o arquivo `server/.env`, copiando do `server/.env.sample`, caso queira modificar com seus valores, basta alterar no arquivo.
 
 ```bash
 make start
@@ -157,16 +157,22 @@ Se desejar iniciar os containers com logs, use o seguinte comando:
 make start logs
 ```
 
+2. Com os containers em execução, acesse o seguinte endereço em seu navegador para visualizar a aplicação:
+
+```bash
+localhost:3000
+```
+
+Para reiniciar os containers, use o seguinte comando:
+
+```bash
+make restart
+```
+
 Para parar os containers, use o seguinte comando:
 
 ```bash
 make stop
-```
-
-2. Com os containers em execução, acesse o seguinte endereço em seu navegador para visualizar a aplicação:
-
-```bash
-localhost:4321
 ```
 
 ## Próximos Passos

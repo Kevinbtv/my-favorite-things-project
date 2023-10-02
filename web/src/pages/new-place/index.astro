@@ -32,6 +32,8 @@ if (!token) {
 </Layout>
 
 <style lang='scss'>
+	@import '../_components/theme/_all.scss';
+
 	section {
 		align-items: center;
 		display: grid;
@@ -44,9 +46,9 @@ if (!token) {
 		}
 
 		aside {
-			background: #1f222a;
+			background: my-trips-color(dark-slate);
 			border-radius: 0.625rem;
-			border: 0.0625rem solid #36393f;
+			border: 0.0625rem solid my-trips-color(graphite);
 			grid-column: 3;
 			height: max-content;
 			padding: 1rem;

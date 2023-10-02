@@ -61,11 +61,13 @@
 </form>
 
 <style lang="scss">
+	@import './theme/all';
+
 	form {
-		background-color: #1e2127;
+		background-color: my-trips-color(charcoal);
 		border-radius: 0.3125rem;
 		box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
-		color: #ffffff;
+		color: my-trips-color(pure-white);
 		margin-top: 3.125rem;
 		margin: 0 auto;
 		padding: 1.25rem;
@@ -81,7 +83,7 @@
 			margin-bottom: 1.25rem;
 
 			label {
-				background-color: #1e2127;
+				background-color: my-trips-color(charcoal);
 				bottom: -0.75rem;
 				font-size: 0.75rem;
 				left: 0.625rem;
@@ -91,11 +93,11 @@
 			}
 
 			input {
-				background-color: #1e2127;
+				background-color: my-trips-color(charcoal);
 				border-radius: 0.3125rem;
-				border: 0.0625rem solid #45494f;
+				border: 0.0625rem solid my-trips-color(steel-gray);
 				box-sizing: border-box;
-				color: #ffffff;
+				color: my-trips-color(pure-white);
 				font-size: 1rem;
 				font-size: 1rem;
 				padding: 1rem;
@@ -108,11 +110,12 @@
 				margin-top: 0.25rem;
 			}
 		}
+
 		button {
-			background-color: #3498db;
+			background-color: my-trips-color(ocean-blue);
 			border-radius: 0.3125rem;
 			border: none;
-			color: #ffffff;
+			color: my-trips-color(pure-white);
 			cursor: pointer;
 			font-size: 1rem;
 			padding: 0.625rem 1.25rem;
@@ -120,7 +123,7 @@
 			width: 100%;
 
 			&:hover {
-				background-color: #2980b9;
+				background-color: my-trips-color(cerulean-blue);
 			}
 		}
 	}

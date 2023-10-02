@@ -60,6 +60,8 @@
 {/if}
 
 <style lang="scss">
+	@import '../theme/all';
+
 	.modal {
 		align-items: center;
 		background-color: rgb(0 0 0 / 32%);
@@ -87,17 +89,17 @@
 
 			#modal-close {
 				align-self: start;
-				background-color: #fff;
-				border: none;
+				background-color: my-trips-color(pure-white);
+				background-image: url('./assets/modal_fechar.svg');
 				background-position: center;
 				background-repeat: no-repeat;
+				border: none;
 				color: transparent;
 				cursor: pointer;
 				font-size: 0;
 				height: 1.5rem;
 				line-height: 0;
 				margin-right: 1rem;
-				background-image: url('./assets/modal_fechar.svg');
 				margin-top: 0.5rem;
 				position: absolute;
 				right: 0;

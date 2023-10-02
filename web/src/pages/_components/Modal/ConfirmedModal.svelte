@@ -60,6 +60,8 @@
 {/if}
 
 <style lang="scss">
+	@import '../theme/all';
+
 	.modal {
 		align-items: center;
 		background-color: rgb(0 0 0 / 32%);
@@ -73,24 +75,24 @@
 		z-index: 16000003;
 
 		#modal-wrapper {
-			background: #232426;
+			align-items: center;
+			background: my-trips-color(dark-slate);
 			border-radius: 1rem;
 			box-shadow: 0 0.75rem 1.5rem 0 rgb(0 0 0 / 12%);
 			box-sizing: border-box;
 			display: flex;
 			flex-direction: column;
-			align-items: center;
+			height: 12.5rem;
+			justify-content: center;
 			max-height: calc(100vh - 8rem);
 			max-width: 37.625rem;
 			padding: 1.5rem 4rem;
 			position: relative;
-			justify-content: center;
-			height: 12.5rem;
 			width: 35rem;
 
 			#modal-title {
 				font-size: 1.5rem;
-				color: #fff;
+				color: my-trips-color(pure-white);
 				margin-bottom: 2rem;
 			}
 
@@ -106,24 +108,24 @@
 					border-radius: 0.25rem;
 					cursor: pointer;
 					font-size: 1rem;
-					color: #fff;
+					color: my-trips-color(pure-white);
 					background-color: transparent;
 					transition: background-color 0.3s;
 				}
 
 				.confirm-button {
-					border: 0.0625rem solid #dc3545;
+					border: 0.0625rem solid my-trips-color(fiery-red);
 
 					&:hover {
-						background-color: #c82333;
+						background-color: my-trips-color(brick-red);
 					}
 				}
 
 				.cancel-button {
-					background-color: #007bff;
+					background-color: my-trips-color(ocean-blue);
 
 					&:hover {
-						background-color: #0056b3;
+						background-color: my-trips-color(cerulean-blue);
 					}
 				}
 			}

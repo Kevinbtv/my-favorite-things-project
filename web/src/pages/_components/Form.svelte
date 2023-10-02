@@ -35,6 +35,8 @@
 {/if}
 
 <style lang="scss">
+	@import './theme/all';
+
 	form {
 		.places {
 			display: flex;
@@ -49,7 +51,7 @@
 			input,
 			textarea {
 				border-radius: 0.3125rem;
-				border: 0.0625rem solid #ccc;
+				border: 0.0625rem solid my-trips-color(light-gray);
 				box-sizing: border-box;
 				font: inherit;
 				margin-bottom: 0.625rem;
@@ -63,23 +65,23 @@
 		}
 
 		button {
-			background-color: #007bff;
+			background-color: my-trips-color(ocean-blue);
 			border-radius: 0.3125rem;
 			border: none;
-			color: #fff;
+			color: my-trips-color(pure-white);
 			cursor: pointer;
 			margin-right: 0.625rem;
 			padding: 0.625rem 1.25rem;
 			transition: background-color 0.3s;
 
 			&:hover {
-				background-color: #0056b3;
+				background-color: my-trips-color(cerulean-blue);
 			}
 		}
 	}
 
 	.feedback {
-		color: #009900;
+		color: my-trips-color(forest-green-darker);
 		font-weight: bold;
 		margin-top: 0.625rem;
 	}

@@ -140,14 +140,16 @@
 {/if}
 
 <style lang="scss">
+	@import './theme/all';
+
 	.location-list {
 		list-style: none;
 		padding: 0;
 
 		li {
-			background: #1f222a;
+			background: my-trips-color(dark-slate);
 			border-radius: 0.625rem;
-			border: 0.0625rem solid #36393f;
+			border: 0.0625rem solid my-trips-color(graphite);
 			display: flex;
 			flex-direction: column;
 			margin-bottom: 1.25rem;
@@ -159,7 +161,7 @@
 				margin-bottom: 1rem;
 
 				.favorite-star {
-					color: gold;
+					color: my-trips-color(goldenrod);
 					font-size: 1.25rem;
 					margin-right: 0.3125rem;
 				}
@@ -172,7 +174,7 @@
 					}
 
 					.field-label {
-						color: #fff;
+						color: my-trips-color(pure-white);
 						font-weight: bold;
 					}
 				}
@@ -186,10 +188,10 @@
 	}
 
 	button {
-		background-color: #2e7d32;
+		background-color: my-trips-color(forest-green);
 		border-radius: 0.3125rem;
 		border: none;
-		color: #fff;
+		color: my-trips-color(pure-white);
 		cursor: pointer;
 		font-weight: bold;
 		margin-left: 0.625rem;
@@ -197,31 +199,31 @@
 		transition: background-color 0.3s;
 
 		&:hover {
-			background-color: #256e28;
+			background-color: my-trips-color(lush-green);
 		}
 
 		&.edit-button {
-			background-color: #1976d2;
+			background-color: my-trips-color(ocean-blue);
 
 			&:hover {
-				background-color: #1565c0;
+				background-color: my-trips-color(cerulean-blue);
 			}
 		}
 
 		&.favorite-button {
-			background-color: #ffc107;
+			background-color: my-trips-color(goldenrod);
 			color: #000;
 
 			&:hover {
-				background-color: #ffab00;
+				background-color: my-trips-color(sunburst);
 			}
 		}
 
 		&.delete-button {
-			background-color: #f44336;
+			background-color: my-trips-color(fiery-red);
 
 			&:hover {
-				background-color: #d32f2f;
+				background-color: my-trips-color(brick-red);
 			}
 		}
 	}
